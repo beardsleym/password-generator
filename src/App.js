@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import zxcvbn from 'zxcvbn';
 import generator from 'generate-password';
-import { RefreshIcon } from '@heroicons/react/outline'
+import { RefreshIcon, ClipboardCopyIcon } from '@heroicons/react/outline'
 
 function App() {
   const [password, setPassword] = useState('');
@@ -97,6 +97,9 @@ function App() {
           
             <div className="relative">
               <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-5 px-5 text-gray-700 border-gray-300 focus:outline-none" />
+              <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="absolute top-3 right-12 p-2" type="button">
+                  <ClipboardCopyIcon className="h-7 w-7 text-blue-500 hover:text-green-500"/>
+                </button> 
                 <button onClick={handleClick} className="absolute top-3 right-3 p-2" type="button">
                   <RefreshIcon className="h-7 w-7 text-blue-500 hover:text-green-500"/>
                 </button> 
