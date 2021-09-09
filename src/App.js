@@ -186,7 +186,7 @@ function App() {
           {feedback && <div>
             {/* GUESS TIMES */}
             <h3 className="text-md font-semibold text-gray-900 tracking-tight">Guess Times</h3>
-            <table className="table-auto">
+            <table className="table-fixed">
               {/* <thead>
                 <tr>
                   <th className="z-20 sticky top-0 text-sm font-semibold text-gray-600 bg-white p-0">Title</th>
@@ -196,9 +196,9 @@ function App() {
               </thead> */}
               <tbody className="">
                 <tr>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">100 / hour:</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light text-center">{feedback.crack_times_display.online_throttling_100_per_hour}</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">throttled online attack</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight w-1/4">100 / hour:</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light text-center w-1/3">{feedback.crack_times_display.online_throttling_100_per_hour}</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight w-1/2">throttled online attack</td>
                 </tr>
                 <tr className="">
                   <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">10 / second:</td>
