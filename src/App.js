@@ -68,7 +68,7 @@ function App() {
 
   useEffect(()=>{
     const result = zxcvbn(password)
-    console.log(result)
+    // console.log(result)
     setFeedback(result)
   },[password])
 
@@ -98,7 +98,8 @@ function App() {
     <div className={`App h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
         <div className=" bg-white shadow-md rounded-3xl px-8 py-8 pt-8 shadow-lg">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-4">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
+          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
+            <h2 className="text-gray-500 font-medium text-lg tracking-tight text-center mb-4">Or enter a <span className="text-gray-900">password</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-500 text-2xl`}>.</span></h2>
             <div className="relative mb-20">
               <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
                 <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
