@@ -112,7 +112,7 @@ function App() {
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
             <h2 className="text-gray-500 font-medium text-lg tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 hover:text-${color}-500`} onClick={(event) => {setPassword('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2>
             <div className="relative mb-20">
-              <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
+              <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
                 <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
                   <ClipboardCopyIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-500`}/>
                 </button> 
@@ -133,15 +133,15 @@ function App() {
           </div>
           {/* <hr className="my-4 mx-16"/> */}
           {/* CUSTOMISE PASSWORD COLUMNS */}
-          <div className="flex justify-around flex-wrap mt-4">
+          <div className="flex justify-around flex-wrap mt-4 items-baseline">
             {/* LENGTH */}
-            <div className="pl-4 pb-4 flex-1">
+            <div className="pl-4 flex-1 ">
               <h6 className="text-md mb-1 font-semibold text-gray-900 tracking-tight">Password Length</h6>
               <input className="w-16 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => setLength(event.target.value)}/>
               <input className="ml-2 w-1/2" type="range" name="length" min="1" max="50" step="1" value={length} onChange={(event) => setLength(event.target.value)}/>
             </div>
             {/* RADIOS */}
-            <div className="mt-1 flex flex-col flex-1">
+            <div className="mt-1 flex flex-col flex-1 ">
               <label className="inline-flex items-center">
                 <input type="radio" value="say" checked={radio === "say"} onChange={handleRadio}/> 
                 <span className="ml-2 text-gray-800">Easy to say</span> 
@@ -156,7 +156,7 @@ function App() {
               </label>
             </div>
             {/* CHECKBOXES */}
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1 ">
               <label className="">
                 <input type="checkbox" name="Uppercase" checked={uppercase} onChange={(event) => setUppercase(event.target.checked)} /> 
                 <span className="ml-2 text-gray-800">Uppercase</span> 
@@ -220,7 +220,7 @@ function App() {
 
             {/* SEQUENCES */}
             <h3 className="text-md font-semibold text-gray-900 tracking-tight mt-4">Sequences </h3>
-              <div className="flex flex-row space-x-4 ">
+              <div className="flex space-x-4 ">
               {feedback.sequence.map((item, index) => (
                 <div className="bg-gray-100 p-1.5 border-gray-200 border" key={index}>
                   <h5 className="bg-gray-500 text-white font-light text-center">{item.token}</h5>
