@@ -95,17 +95,17 @@ function App() {
   },[feedback.score])
 
   return (
-    <div className="App h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-600 via-blue-500 to-gray-500">
+    <div className={`App h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
         <div className=" bg-white shadow-md rounded-3xl px-8 py-8 pt-8 shadow-lg">
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-4">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
             <div className="relative mb-20">
               <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
                 <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
-                  <ClipboardCopyIcon className="h-7 w-7 text-blue-500 hover:text-green-500"/>
+                  <ClipboardCopyIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-500`}/>
                 </button> 
                 <button onClick={handleClick} className="bg-white absolute top-2 right-3 p-2" type="button">
-                  <RefreshIcon className="h-7 w-7 text-blue-500 hover:text-green-500"/>
+                  <RefreshIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-500`}/>
                 </button>
                   {/* WARNING MESSAGE */}
                   {feedback?.feedback?.warning && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning} </p>} 
