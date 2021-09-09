@@ -60,6 +60,17 @@ function App() {
   // On first render
   useEffect(()=>{
     generatePassword()
+    let msg = "%c Hi 👋! If you're hiring 👨‍💻, I'm looking for a job 🚀! 🤙 https://tini.to/matt/" ; 
+    let styles= [ 
+        'font-size: 12px', 
+        'font-family: monospace', 
+        'background: white', 
+        'display: inline-block', 
+        'color: black', 
+        'padding: 8px 19px', 
+        'border: 1px dashed;' 
+    ].join(';') 
+    console.log(msg, styles);
   },[])
    
    useEffect(()=>{
@@ -76,7 +87,7 @@ function App() {
     let color = ''
     switch (feedback.score) {
       case 0:
-        color = ''
+        color = 'gray'
         break;
       case 1:
         color = 'gray'
@@ -95,11 +106,11 @@ function App() {
   },[feedback.score])
 
   return (
-    <div className={`App h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
+    <div className={`App sm:h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
-        <div className=" bg-white shadow-md rounded-3xl px-8 py-8 pt-8 shadow-lg">
+        <div className=" bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 py-8 pt-8">
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
-            <h2 className="text-gray-500 font-medium text-lg tracking-tight text-center mb-4">Or enter a <span className="text-gray-900">password</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-500 text-2xl`}>.</span></h2>
+            <h2 className="text-gray-500 font-medium text-lg tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 hover:text-${color}-500`} onClick={(event) => {setPassword('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2>
             <div className="relative mb-20">
               <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
                 <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
@@ -120,11 +131,11 @@ function App() {
             {feedback.score > 2 && <div className={`rounded border-b-8 border-${color}-400`}></div>}
             {feedback.score > 3 && <div className={`rounded border-b-8 border-${color}-400`}></div>}
           </div>
-          <hr className="my-4 mx-16"/>
+          {/* <hr className="my-4 mx-16"/> */}
           {/* CUSTOMISE PASSWORD COLUMNS */}
-          <div className="flex justify-around flex-wrap">
+          <div className="flex justify-around flex-wrap mt-4">
             {/* LENGTH */}
-            <div className="px-4 pb-4 flex-1">
+            <div className="pl-4 pb-4 flex-1">
               <h6 className="text-md mb-1 font-semibold text-gray-900 tracking-tight">Password Length</h6>
               <input className="w-16 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => setLength(event.target.value)}/>
               <input className="ml-2 w-1/2" type="range" name="length" min="1" max="50" step="1" value={length} onChange={(event) => setLength(event.target.value)}/>
@@ -165,7 +176,12 @@ function App() {
             </div>
 
           </div>
-          <hr className="my-4 mx-16" />
+          {/* DIVIDERS */}
+          <hr className="mx-56 mt-4" />
+          <hr className="my-1 mx-36" />
+          <hr className="my-1 mx-16" />
+          <hr className="my-1 mx-36" />
+          <hr className="mx-56 mb-4" />
           {/* ZXCVBN RESULTS */}
           {feedback && <div>
             {/* GUESS TIMES */}
