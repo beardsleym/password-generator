@@ -114,10 +114,10 @@ function App() {
             <div className="relative mb-20">
               <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
                 <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
-                  <ClipboardCopyIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-500`}/>
+                  <ClipboardCopyIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400`}/>
                 </button> 
                 <button onClick={handleClick} className="bg-white absolute top-2 right-3 p-2" type="button">
-                  <RefreshIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-500`}/>
+                  <RefreshIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400`}/>
                 </button>
                   {/* WARNING MESSAGE */}
                   {feedback?.feedback?.warning && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning} </p>} 
@@ -137,7 +137,7 @@ function App() {
             {/* LENGTH */}
             <div className="pl-4 flex-1 ">
               <h6 className="text-md mb-1 font-semibold text-gray-900 tracking-tight">Password Length</h6>
-              <input className="w-16 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => setLength(event.target.value)}/>
+              <input className="w-12 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => setLength(event.target.value)}/>
               <input className="ml-2 w-1/2" type="range" name="length" min="1" max="50" step="1" value={length} onChange={(event) => setLength(event.target.value)}/>
             </div>
             {/* RADIOS */}
@@ -177,11 +177,11 @@ function App() {
 
           </div>
           {/* DIVIDERS */}
-          <hr className="mx-56 mt-4" />
-          <hr className="my-1 mx-36" />
-          <hr className="my-1 mx-16" />
-          <hr className="my-1 mx-36" />
-          <hr className="mx-56 mb-4" />
+          <hr className={`mx-56 mt-4 border-${color}-400`} />
+          <hr className={`my-1 mx-36 border-${color}-400`} />
+          <hr className={`my-1 mx-16 border-${color}-400`} />
+          <hr className={`my-1 mx-36 border-${color}-400`} />
+          <hr className={`mx-56 mb-4 border-${color}-400`} />
           {/* ZXCVBN RESULTS */}
           {feedback && <div>
             {/* GUESS TIMES */}
