@@ -108,9 +108,9 @@ function App() {
   return (
     <div className={`App sm:h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
-        <div className=" bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 py-8 pt-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
-            <h2 className="text-gray-500 font-medium text-lg tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 hover:text-${color}-500`} onClick={(event) => {setPassword('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2>
+        <div className=" bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 sm:py-8">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
+            <h2 className="sm:text-lg text-gray-500 font-medium tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 hover:text-${color}-500`} onClick={(event) => {setPassword('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2>
             <div className="relative mb-20">
               <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
                 <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
@@ -197,23 +197,23 @@ function App() {
               <tbody className="">
                 <tr>
                   <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">100 / hour:</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light">{feedback.crack_times_display.online_throttling_100_per_hour}</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">(throttled online attack)</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light text-center">{feedback.crack_times_display.online_throttling_100_per_hour}</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">throttled online attack</td>
                 </tr>
                 <tr className="">
                   <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">10 / second:</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light">{feedback.crack_times_display.online_no_throttling_10_per_second}</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">(unthrottled online attack)</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light text-center">{feedback.crack_times_display.online_no_throttling_10_per_second}</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">unthrottled online attack</td>
                 </tr>
                 <tr>
                   <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">10k / second:</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light">{feedback.crack_times_display.offline_slow_hashing_1e4_per_second}</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">(offline attack, slow hash, many cores)</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light text-center">{feedback.crack_times_display.offline_slow_hashing_1e4_per_second}</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">offline attack, slow hash</td>
                 </tr>
                 <tr>
                   <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">10B / hour:</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light">{feedback.crack_times_display.offline_fast_hashing_1e10_per_second}</td>
-                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">(offline attack, fast hash, many cores)</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-light text-center">{feedback.crack_times_display.offline_fast_hashing_1e10_per_second}</td>
+                  <td className="py-2 pl-2 text-xs text-light-blue-600 whitespace-pre border border-gray-200 px-2 font-extralight">offline attack, fast hash</td>
                 </tr>
               </tbody>
             </table>
