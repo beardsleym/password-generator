@@ -85,7 +85,7 @@ function App() {
   // On first render
   useEffect(()=>{
     generatePassword()
-    let msg = "%c Hi 👋! If you're hiring 👨‍💻, I'm looking for a job 🚀! 🤙 https://tini.to/matt/" ; 
+    let msg = "%c Hi 👋! If you're hiring 👨‍💻, I'm looking for a job 🚀 | 🤙 https://tini.to/matt/" ; 
     let styles= [ 
         'font-size: 12px', 
         'font-family: monospace', 
