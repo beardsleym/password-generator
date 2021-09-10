@@ -8,14 +8,15 @@ function App() {
   const [uppercase, setUppercase] = useState(true);
   const [lowercase, setLowercase] = useState(true);
   const [numbers, setNumbers] = useState(true);
-  const [symbols, setSymbols] = useState(true);
-  const [length, setLength] = useState(12);
+  const [symbols, setSymbols] = useState(false);
+  const [length, setLength] = useState(14);
   const [excludeSimilarCharacters, setExcludeSimilarCharacters] = useState(false);
-  const [radio, setRadioval] = useState('all');
+  const [radio, setRadioval] = useState('read');
 
   const [feedback, setFeedback] = useState('');
-  // const [score, setScore] = useState(null);
   const [color, setColor] = useState('');
+
+  const [isCopied, setIsCopied] = useState(false);
 
   const generatePassword = () => {
     const config = {
@@ -36,6 +37,11 @@ function App() {
   const handleClick = () => {
     generatePassword()
   }
+
+  const handleLength = (length) => {
+    setLength(length)
+  }
+
   const handleRadio = (event) => {
     const value = event.target.value
     setRadioval(value)
@@ -75,12 +81,14 @@ function App() {
    
    useEffect(()=>{
     generatePassword()
-  },[length,uppercase,lowercase,symbols,numbers,radio])
+  },[length, uppercase,lowercase,symbols,numbers,radio])
 
   useEffect(()=>{
     const result = zxcvbn(password)
     // console.log(result)
+    // setLength(password.length)
     setFeedback(result)
+    setIsCopied(false)
   },[password])
 
   useEffect(()=>{
@@ -105,16 +113,26 @@ function App() {
     setColor(color)
   },[feedback.score])
 
+  const handleCopyBtn = () => {
+      navigator.clipboard.writeText(password)
+      setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    },3000)
+  }
+
   return (
     <div className={`App sm:h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
         <div className=" bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 sm:py-8">
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
-            <h2 className="sm:text-lg text-gray-500 font-medium tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 hover:text-${color}-500`} onClick={(event) => {setPassword('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className="text-gray-900">strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2>
+            <h2 className="sm:text-lg text-gray-500 font-medium tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 hover:text-${color}-400`} onClick={(event) => {setPassword('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className={`text-gray-900 hover:text-${color}-400`} onClick={(event) => {setPassword('strength')}}>strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2>
             <div className="relative mb-20">
-              <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
-                <button onClick={(event) => {navigator.clipboard.writeText(password)}} className="bg-white absolute top-2 right-12 p-2" type="button">
+              <input type="text"  value={password} onChange={(event) => setPassword(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
+                <button onClick={handleCopyBtn} className="bg-white absolute top-2 right-12 p-2" type="button">
                   <ClipboardCopyIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400`}/>
+                  {/* COPY TOOLTIP */}
+                  {isCopied && <span className={`absolute top-6 right-16 inline-flex items-center justify-center px-2 py-1 text-xs font-thin leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-${color}-400 rounded-full`}>copied</span>}
                 </button> 
                 <button onClick={handleClick} className="bg-white absolute top-2 right-3 p-2" type="button">
                   <RefreshIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400`}/>
@@ -133,15 +151,15 @@ function App() {
           </div>
           {/* <hr className="my-4 mx-16"/> */}
           {/* CUSTOMISE PASSWORD COLUMNS */}
-          <div className="flex justify-around flex-wrap mt-4 items-baseline">
+          <div className="flex flex-wrap mt-4">
             {/* LENGTH */}
-            <div className="pl-4 flex-1 ">
+            <div className="flex-2 flex-grow items-center p-4">
               <h6 className="text-md mb-1 font-semibold text-gray-900 tracking-tight">Password Length</h6>
-              <input className="w-12 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => setLength(event.target.value)}/>
-              <input className="ml-2 w-1/2" type="range" name="length" min="1" max="50" step="1" value={length} onChange={(event) => setLength(event.target.value)}/>
+              <input className="w-12 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => handleLength(event.target.value)}/>
+              <input className="ml-1 w-3/4" type="range" name="length" min="1" max="50" step="1" value={length} onChange={(event) => handleLength(event.target.value)}/>
             </div>
             {/* RADIOS */}
-            <div className="mt-1 flex flex-col flex-1 ">
+            <div className="flex flex-col flex-1 p-4 min-w-max">
               <label className="inline-flex items-center">
                 <input type="radio" value="say" checked={radio === "say"} onChange={handleRadio}/> 
                 <span className="ml-2 text-gray-800">Easy to say</span> 
@@ -156,7 +174,7 @@ function App() {
               </label>
             </div>
             {/* CHECKBOXES */}
-            <div className="flex flex-col flex-1 ">
+            <div className="flex flex-col flex-1 p-4 min-w-max">
               <label className="">
                 <input type="checkbox" name="Uppercase" checked={uppercase} onChange={(event) => setUppercase(event.target.checked)} /> 
                 <span className="ml-2 text-gray-800">Uppercase</span> 
@@ -186,7 +204,7 @@ function App() {
           {feedback && <div>
             {/* GUESS TIMES */}
             <h3 className="text-md font-semibold text-gray-900 tracking-tight">Guess Times</h3>
-            <table className="table-fixed">
+            <table className="table-fixed m-2">
               {/* <thead>
                 <tr>
                   <th className="z-20 sticky top-0 text-sm font-semibold text-gray-600 bg-white p-0">Title</th>
@@ -220,9 +238,9 @@ function App() {
 
             {/* SEQUENCES */}
             <h3 className="text-md font-semibold text-gray-900 tracking-tight mt-4">Sequences </h3>
-              <div className="flex space-x-4 ">
+              <div className="flex flex-wrap">
               {feedback.sequence.map((item, index) => (
-                <div className="bg-gray-100 p-1.5 border-gray-200 border" key={index}>
+                <div className="bg-gray-100 p-1.5 border-gray-200 border m-2 flex-grow max-w-xs" key={index}>
                   <h5 className="bg-gray-500 text-white font-light text-center">{item.token}</h5>
                   <p className="text-sm font-extralight">pattern: <span className="font-light">{item.pattern}</span></p>
                   {item.reversed && <p className="text-sm font-extralight">reversed: <span className="font-light">{item.reversed ? 'true' : 'false'}</span></p>}
