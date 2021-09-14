@@ -6,6 +6,8 @@ import StrengthMeter from './StrengthMeter';
 import Sequences from './Sequences';
 import GuessTimes from './GuessTimes';
 import Dividers from './Dividers';
+import IpData from './IpData';
+
 
 function App() {
   const [password, setPassword] = useState('');
@@ -19,6 +21,8 @@ function App() {
 
   const [feedback, setFeedback] = useState('');
   const [color, setColor] = useState('gray');
+  const [ipData, setIpData] = useState(null);
+
 
   const [isCopied, setIsCopied] = useState(false);
 
@@ -95,8 +99,22 @@ function App() {
         'padding: 8px 19px', 
         'border: 1px dashed;' 
     ].join(';') 
-    console.log(msg, styles);
+    // console.log(msg, styles);
   },[])
+
+  useEffect(() => {
+    fetch("https://ip.uv.workers.dev")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          result.platform = result.platform.replace(/"/g,"")
+          setIpData(result)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }, [])
    
    useEffect(()=>{
     generatePassword()
@@ -212,6 +230,7 @@ function App() {
               <Sequences feedback={feedback}/>
           </div>}
         </div>
+        {ipData && <IpData ipData={ipData} />}
       </div>
     </div>
   );
