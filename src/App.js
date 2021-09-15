@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import zxcvbn from 'zxcvbn';
+import sha1 from 'crypto-js/sha1';
 import generator from 'generate-password';
 import { RefreshIcon, ClipboardCopyIcon } from '@heroicons/react/outline'
+import { useDebounce } from 'react-use'
 import StrengthMeter from './StrengthMeter';
 import Sequences from './Sequences';
 import GuessTimes from './GuessTimes';
@@ -20,11 +22,14 @@ function App() {
   const [radio, setRadioval] = useState('read');
 
   const [feedback, setFeedback] = useState('');
+  const [isPwned, setIsPwned] = useState(0);
   const [color, setColor] = useState('gray');
   const [ipData, setIpData] = useState(null);
 
 
   const [isCopied, setIsCopied] = useState(false);
+
+ 
 
   const generatePassword = (value) => {
     const config = {
@@ -53,7 +58,6 @@ function App() {
   }
 
   const handleLength = (value) => {
-    console.log(value)
     setLength(value)
     generatePassword(value)
   }
@@ -80,10 +84,32 @@ function App() {
   }
   const handleCopyBtn = () => {
     navigator.clipboard.writeText(password)
+    // copyToClipboard(password)
     setIsCopied(true);
     setTimeout(() => {
       setIsCopied(false);
     },1500)
+  }
+
+  const pwnedPwCheck = async (password) => {
+    const hash = sha1(password).toString().toUpperCase()
+    const prefix = hash.substring(0,5)
+    const suffix = hash.substring(5)
+    // console.log({hash, prefix, suffix})
+    try {
+      const res = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`)
+      const results = await res.text()
+      const split_array = results.split(/\r?\n/)
+      const split_object = split_array.map((str) => {
+        const temp = str.split(':')
+        return {suffix: temp[0], count: Number(temp[1])}
+      })
+      const match  = split_object.find(el => el.suffix === suffix)
+      setIsPwned(match?.count ? match.count : 0)
+    } catch (error) {
+      console.log(error)
+      setIsPwned(0)
+    }
   }
 
   // On first render
@@ -108,6 +134,7 @@ function App() {
       .then(
         (result) => {
           result.platform = result.platform.replace(/"/g,"")
+          console.log(result)
           setIpData(result)
         },
         (error) => {
@@ -123,10 +150,19 @@ function App() {
   useEffect(()=>{
     const result = zxcvbn(password)
     // console.log(result)
-    // setLength(password.length)
+    setIsPwned(0)
     setFeedback(result)
     setIsCopied(false)
   },[password])
+
+  // Pwned Password custom UseEffect
+  const [, cancel] = useDebounce(
+    () => {
+      pwnedPwCheck(password)
+    },
+    500,
+    [password]
+  );
 
   useEffect(()=>{
     let color = ''
@@ -167,9 +203,10 @@ function App() {
                   <RefreshIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400 transition duration-200 ease-in-out`}/>
                 </button>
                   {/* WARNING MESSAGE */}
-                  {feedback?.feedback?.warning && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning} </p>} 
+                  {feedback?.feedback?.warning && isPwned > 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning}. <span className="font-semibold">{isPwned.toLocaleString()} data breaches.</span> </p>} 
+                  {feedback?.feedback?.warning && isPwned === 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning}</p>}
+                  {!feedback?.feedback?.warning && isPwned > 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{isPwned.toLocaleString()} data breaches.</p>}
             </div>
-            
           {/* STRENGTH METER */}
           <StrengthMeter score={feedback.score} color={color}/>
           {/* CUSTOMISE PASSWORD COLUMNS */}
