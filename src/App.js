@@ -203,9 +203,9 @@ function App() {
                   <RefreshIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400 transition duration-200 ease-in-out`}/>
                 </button>
                   {/* WARNING MESSAGE */}
-                  {feedback?.feedback?.warning && isPwned > 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning}. <span className="font-semibold">{isPwned.toLocaleString()} data breaches.</span> </p>} 
+                  {feedback?.feedback?.warning && isPwned > 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning}. <span className="font-semibold">{isPwned.toLocaleString()} data {isPwned > 1 ? 'breaches' : 'breach'}.</span> </p>} 
                   {feedback?.feedback?.warning && isPwned === 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{feedback.feedback.warning}</p>}
-                  {!feedback?.feedback?.warning && isPwned > 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{isPwned.toLocaleString()} data breaches.</p>}
+                  {!feedback?.feedback?.warning && isPwned > 0 && <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">{isPwned.toLocaleString()} data {isPwned > 1 ? 'breaches' : 'breach'}.</p>}
             </div>
           {/* STRENGTH METER */}
           <StrengthMeter score={feedback.score} color={color}/>
