@@ -166,25 +166,29 @@ function App() {
 
   useEffect(()=>{
     let color = ''
-    switch (feedback.score) {
-      case 0:
-        color = 'gray'
-        break;
-      case 1:
-        color = 'gray'
-        break;
-      case 2:
-        color = 'red'
-        break;
-      case 3:
-        color = 'yellow'
-        break;
-      case 4:
-        color = 'green'
-        break;  
+    if (isPwned > 0) {
+      color = 'red'
+    } else {
+      switch (feedback.score) {
+        case 0:
+          color = 'gray'
+          break;
+        case 1:
+          color = 'gray'
+          break;
+        case 2:
+          color = 'red'
+          break;
+        case 3:
+          color = 'yellow'
+          break;
+        case 4:
+          color = 'green'
+          break;  
+      }
     }
     setColor(color)
-  },[feedback.score])
+  },[feedback.score, isPwned])
 
   return (
     <div className={`App sm:h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
