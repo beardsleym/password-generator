@@ -134,7 +134,7 @@ function App() {
       .then(
         (result) => {
           result.platform = result.platform.replace(/"/g,"")
-          console.log(result)
+          // console.log(result)
           setIpData(result)
         },
         (error) => {
