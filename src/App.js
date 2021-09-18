@@ -1,35 +1,35 @@
+//React imports
+import { useDebounce } from 'react-use'
 import { useState, useEffect } from 'react';
+import { RefreshIcon, ClipboardCopyIcon } from '@heroicons/react/outline'
+// External packages
 import zxcvbn from 'zxcvbn';
 import sha1 from 'crypto-js/sha1';
 import generator from 'generate-password';
-import { RefreshIcon, ClipboardCopyIcon } from '@heroicons/react/outline'
-import { useDebounce } from 'react-use'
-import StrengthMeter from './StrengthMeter';
-import Sequences from './Sequences';
-import GuessTimes from './GuessTimes';
-import Dividers from './Dividers';
-import IpData from './IpData';
-
+// Components
+import IpData from './components/IpData';
+import Dividers from './components/Dividers';
+import Sequences from './components/Sequences';
+import GuessTimes from './components/GuessTimes';
+import StrengthMeter from './components/StrengthMeter';
 
 function App() {
+  // App
+  const [color, setColor] = useState('gray');
   const [password, setPassword] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
+  // Customise password
+  const [length, setLength] = useState(14);
+  const [numbers, setNumbers] = useState(true);
+  const [radio, setRadioval] = useState('read');
+  const [symbols, setSymbols] = useState(false);
   const [uppercase, setUppercase] = useState(true);
   const [lowercase, setLowercase] = useState(true);
-  const [numbers, setNumbers] = useState(true);
-  const [symbols, setSymbols] = useState(false);
-  const [length, setLength] = useState(14);
   const [excludeSimilarCharacters, setExcludeSimilarCharacters] = useState(false);
-  const [radio, setRadioval] = useState('read');
-
-  const [feedback, setFeedback] = useState('');
+  // API Data
   const [isPwned, setIsPwned] = useState(0);
-  const [color, setColor] = useState('gray');
   const [ipData, setIpData] = useState(null);
-
-
-  const [isCopied, setIsCopied] = useState(false);
-
- 
+  const [feedback, setFeedback] = useState('');
 
   const generatePassword = (value) => {
     const config = {
@@ -48,6 +48,7 @@ function App() {
     }
   }
 
+  // Handle input changes
   const handleInput = (text) => {
     setPassword(text)
     setLength(text.length)
@@ -84,13 +85,13 @@ function App() {
   }
   const handleCopyBtn = () => {
     navigator.clipboard.writeText(password)
-    // copyToClipboard(password)
     setIsCopied(true);
     setTimeout(() => {
       setIsCopied(false);
     },1500)
   }
 
+  // API Calls
   const pwnedPwCheck = async (password) => {
     const hash = sha1(password).toString().toUpperCase()
     const prefix = hash.substring(0,5)
@@ -111,10 +112,12 @@ function App() {
       setIsPwned(0)
     }
   }
-
+  // Use effects
   // On first render
   useEffect(()=>{
+    // Generate a password
     generatePassword()
+    // Console log a nice message
     let msg = "%c Hi 👋! If you're hiring 👨‍💻, I'm looking for a job 🚀 | 🤙 https://tini.to/matt/" ; 
     let styles= [ 
         'font-size: 12px', 
@@ -125,10 +128,8 @@ function App() {
         'padding: 8px 19px', 
         'border: 1px dashed;' 
     ].join(';') 
-    // console.log(msg, styles);
-  },[])
-
-  useEffect(() => {
+    console.log(msg, styles);
+    // Fetch ip and weather data from cloudflare worker
     fetch("https://passwrd.uv.workers.dev")
       .then(res => res.json())
       .then(
@@ -141,21 +142,22 @@ function App() {
           console.log(error)
         }
       )
-  }, [])
-   
-   useEffect(()=>{
+  },[])
+
+  // Generate a new password if customisation changes
+  useEffect(()=>{
     generatePassword()
   },[uppercase,lowercase,symbols,numbers,radio])
 
+  // Check password strength
   useEffect(()=>{
     const result = zxcvbn(password)
-    // console.log(result)
     setIsPwned(0)
     setFeedback(result)
     setIsCopied(false)
   },[password])
 
-  // Pwned Password custom UseEffect
+  // HaveIBeenPwned Lookup- Custom UseEffect
   const [, cancel] = useDebounce(
     () => {
       pwnedPwCheck(password)
@@ -163,7 +165,7 @@ function App() {
     500,
     [password]
   );
-
+  // App color change if password strength changes
   useEffect(()=>{
     let color = ''
     if (isPwned > 0) {
@@ -190,6 +192,7 @@ function App() {
     setColor(color)
   },[feedback.score, isPwned])
 
+  // HTML
   return (
     <div className={`App sm:h-screen w-full flex justify-center items-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
@@ -260,7 +263,6 @@ function App() {
 
           {/* DIVIDERS */}
           <Dividers color={color} />
-
           {/* ZXCVBN RESULTS */}
           {feedback && <div>
             {/* GUESS TIMES */}

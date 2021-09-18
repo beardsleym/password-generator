@@ -2,6 +2,25 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## React Files
+
+cd src
+yarn start
+
+## Cloudflare Worker Files
+
+cd wrangler
+wranger dev
+wrangler publish
+
+## Cloudflare Pages
+
+git add .
+git commit -m 'message'
+git push
+
+- pushed git repo automatically deployed to Pages
+
 ## Available Scripts
 
 In the project directory, you can run:
