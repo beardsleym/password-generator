@@ -1,0 +1,7 @@
+name = "passwrd"
+type = "javascript"
+
+account_id = "e009db83777a491f852bb4f2d7e154da"
+workers_dev = true
+route = ""
+zone_id = ""

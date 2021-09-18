@@ -129,7 +129,7 @@ function App() {
   },[])
 
   useEffect(() => {
-    fetch("https://ip.uv.workers.dev")
+    fetch("https://passwrd.uv.workers.dev")
       .then(res => res.json())
       .then(
         (result) => {

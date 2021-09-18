@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "passwrd",
+  "version": "1.0.0",
+  "description": "Fetch IP, country and weather information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write '**/*.{js,css,json,md}'"
+  },
+  "author": "Matthew Beardsley",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
