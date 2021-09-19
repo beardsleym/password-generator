@@ -67,3 +67,16 @@ This is currently deployed on [Pages](https://pages.cloudflare.com/)
 ### Cloudflare Workers
 
 The serverless function running IP data and getting Weather data is on [Workers](https://workers.cloudflare.com/)
+
+```
+cd wrangler
+cp wrangler.toml.example wrangler.toml
+```
+
+Add `account_id`
+
+> #### account_id required
+>
+> This is the ID of the account associated with your zone. You might have more than one account, so make sure to use the ID of the account associated with the zone_id you provide, if you provide one. It can also be specified through the CF_ACCOUNT_ID environment variable.
+
+It is safe to commit `account_id` and `zone_id` as per this [Github issue](https://github.com/cloudflare/wrangler/issues/209#issuecomment-541654484)
