@@ -2,7 +2,7 @@
 name = "passwrd"
 type = "javascript"
 
-account_id = ""
+account_id = "required"
 workers_dev = true
 route = ""
 zone_id = ""

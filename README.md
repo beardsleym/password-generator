@@ -52,7 +52,8 @@ If the user is located in one of
 - Palau
 - The Federated States of Micronesia
 - Marshall Islands
-  > We request the data in imperial (Fahrenheit) otherwise we request it in metric (Celcius)
+
+We request the data in imperial (Fahrenheit) otherwise we request it in metric (Celcius).
 
 ### ZXCVBN
 
