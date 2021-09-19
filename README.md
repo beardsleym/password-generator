@@ -1,89 +1,68 @@
-# Getting Started with Create React App
+# Password Generator and Strength Checker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Deployed at... [passwrd.pages.dev](https://passwrd.pages.dev)
 
-## React Files
+Password-generator is a basic React web application for generating secure, random passwords with the option of customising the length, the appearance of numbers, uppercase and lowercase letters and symbols.
+The strength of the password is also checked and is shown in a range of colors from 0 - no color at all, through to 5 - green.
+At the same time, the password is checked with [HaveIBeenPwned](https://haveibeenpwned.com/Passwords) to see if it is contained in any data breaches.
+Because I'm obsessed with the weather and how I am seen online, a Cloudflare worker returns the users IP, City, Country and uses that information to lookup the current weather.
 
-- cd src
-- yarn start
+## Get Started
 
-## Cloudflare Worker Files
+### React
 
-- cd wrangler
-- wranger dev
-- wrangler publish
+```language
+cd src
+yarn start
+```
 
-## Cloudflare Pages
+> Development server on localhost:3000
 
-- git add .
-- git commit -m 'message'
-- git push
+### Cloudflare workers
 
-* pushed git repo automatically deployed to Pages
+```language
+cd wrangler
+wrangler dev
+wrangler secret put API_KEY  //Add secret
+wrangler publish
+```
 
-## Available Scripts
+> see wrangler.toml
 
-In the project directory, you can run:
+### TailwindCSS
 
-### `yarn start`
+`tailwind.config.js` contains classes that are generated dynamically in application
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### HaveIBeenPwned
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Password breach is available on free API tier at [HaveIBeenPwned](https://haveibeenpwned.com/API/v3)
 
-### `yarn test`
+> In order to protect the value of the source password being searched for, Pwned Passwords also implements a k-Anonymity model that allows a password to be searched for by partial hash. This allows the first 5 characters of a SHA-1 password hash (not case-sensitive) to be passed to the API
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### OpenWeather
 
-### `yarn build`
+[Openweather API](https://openweathermap.org/api) has 1,000,000 free monthly requests.
+We use the users latitude and longitude to check the weather.
+If the user is located in one of
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- United States
+- Bahamas
+- Cayman Islands
+- Liberia
+- Palau
+- The Federated States of Micronesia
+- Marshall Islands
+  > We request the data in imperial (Fahrenheit) otherwise we request it in metric (Celcius)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ZXCVBN
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> zxcvbn is a password strength estimator inspired by password crackers. Through pattern matching and conservative estimation, it recognizes and weighs 30k common passwords, common names and surnames according to US census data, popular English words from Wikipedia and US television and movies, and other common patterns like dates, repeats (aaa), sequences (abcd), keyboard patterns (qwertyuiop), and l33t speak.
+> [ZXCVBN Github Repo](https://github.com/dropbox/zxcvbn)
 
-### `yarn eject`
+### Cloudflare Pages
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This is currently deployed on [Pages](https://pages.cloudflare.com/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Cloudflare Workers
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The serverless function running IP data and getting Weather data is on [Workers](https://workers.cloudflare.com/)
