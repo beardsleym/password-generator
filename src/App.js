@@ -233,7 +233,7 @@ function App() {
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
             <h2 className="sm:text-lg text-gray-500 font-medium tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 cursor-pointer hover:text-${color}-400 transition duration-200 ease-in-out`} onClick={(event) => {handleInput('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className={`text-gray-900 cursor-pointer hover:text-${color}-400 transition duration-200 ease-in-out`} onClick={(event) => {handleInput('strength')}}>strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2> 
             <div className="relative mb-20">
-              <input type="text"  value={password} onChange={(event) => handleInput(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono text-xl" />
+              <input type="text"  value={password} onChange={(event) => handleInput(event.target.value)} className="absolute tracking-wider border rounded w-full py-4 px-2 sm:px-5 text-gray-700 border-gray-300 focus:outline-none font-mono sm:text-xl" />
                 <button onClick={handleCopyBtn} className="bg-white absolute top-2 right-11 p-2" type="button">
                   <ClipboardCopyIcon className={`h-7 w-7 text-blue-500 hover:text-${color}-400 transition duration-200 ease-in-out`}/>
                 {/* COPY TOOLTIP */}
@@ -256,8 +256,8 @@ function App() {
               className="flex items-center cursor-pointer"
             > 
               {/* <!-- label --> */}
-              <div className={passphrase ? `text-gray-700 mr-3 font-medium text-sm` : `text-${color}-400 mr-3 font-medium text-sm`}>
-                P@$$w0rd!
+              <div className={passphrase ? `text-gray-500 mr-3 font-medium text-sm` : `text-gray-900 mr-3 font-medium text-sm`}>
+                Tr0ub4dor&3
               </div>
               {/* <!-- toggle --> */}
               <div className="relative">
@@ -269,7 +269,7 @@ function App() {
                 <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
               </div>
               {/* <!-- label --> */}
-              <div className={!passphrase ? `text-gray-700 ml-3 font-medium text-sm` : `text-${color}-400 ml-3 font-medium text-sm`}>
+              <div className={!passphrase ? `text-gray-500 ml-3 font-medium text-sm` : `text-gray-900 ml-3 font-medium text-sm`}>
                 correct-horse-battery-staple
               </div>
             </label>
