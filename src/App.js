@@ -29,6 +29,7 @@ function App() {
   const [excludeSimilarCharacters, setExcludeSimilarCharacters] = useState(false);
   // Word Password - Niceware
   const [passphrase, setPassphrase] = useState(false);
+  const [join, setJoin] = useState('-');
   // API Data
   const [isPwned, setIsPwned] = useState(0);
   const [ipData, setIpData] = useState(null);
@@ -36,7 +37,7 @@ function App() {
 
   const generatePassword = (value) => {
     if (value === 'passphrase') {
-      setPassword(niceware.generatePassphrase(6).join('-'))
+      setPassword(niceware.generatePassphrase(6).join(join))
     } else if (value === 'random') {
       const config = {
         length: 14,
@@ -48,7 +49,7 @@ function App() {
       }
       setPassword(generator.generate(config)) 
     } else if (passphrase) {
-      setPassword(niceware.generatePassphrase(value ? value * 2 : length * 2).join('-'))
+      setPassword(niceware.generatePassphrase(value ? value * 2 : length * 2).join(join))
     } else {
       const config = {
         length: value ? value : length,
@@ -108,6 +109,22 @@ function App() {
       setLowercase(true)
     } 
   }
+
+  const handleJoin = (value) => {
+    let regex
+    if (join === '.') {
+      regex = new RegExp(/\./, 'g')
+    } else {
+      regex = new RegExp(join, 'g')
+    }
+    if (value === join) {
+      return
+    }
+    console.log({value, join, regex, password})
+    setPassword(password.replace(regex, value))
+    setJoin(value)
+  }
+
   const handleCopyBtn = () => {
     navigator.clipboard.writeText(password)
     setIsCopied(true);
@@ -277,46 +294,61 @@ function App() {
           {/* CUSTOMISE PASSWORD COLUMNS */}
           <div className="flex flex-wrap mt-4">
             {/* LENGTH */}
-            <div className="flex-2 flex-grow items-center p-4">
-              <h6 className="text-md mb-1 font-semibold text-gray-900 tracking-tight">Password Length</h6>
-              <input className="w-12 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => handleLength(event.target.value)}/>
-              <input className="ml-3 w-3/4" type="range" name="length" min="1" max="30" value={length} onChange={(event) => handleLength(event.target.value)}/>
-            </div>
+              <div className="flex-2 flex-grow items-center p-4">
+                <h6 className="text-md mb-1 font-semibold text-gray-900 tracking-tight">Password Length</h6>
+                <input className="w-12 border rounded py-2 px-3 text-gray-700 border-gray-300 focus:outline-none" type="number" value={length} onChange={(event) => handleLength(event.target.value)}/>
+                <input className="ml-3 w-3/4" type="range" name="length" min="1" max="30" value={length} onChange={(event) => handleLength(event.target.value)}/>
+              </div>
             {/* RADIOS */}
-            <div className="flex flex-col flex-1 p-4 min-w-max">
-              <label className="inline-flex items-center">
-                <input type="radio" value="say" checked={radio === "say"} onChange={handleRadio} disabled={passphrase}/> 
-                <span className="ml-2 text-gray-800">Easy to say</span> 
-              </label>
-              <label className="inline-flex items-center">
-                <input type="radio" value="read" checked={radio === "read"} onChange={handleRadio} disabled={passphrase}/>
-                <span className="ml-2 text-gray-800">Easy to read</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input type="radio" value="all" checked={radio === "all"} onChange={handleRadio} disabled={passphrase}/>
-                <span className="ml-2 text-gray-800">All characters</span>
-              </label>
-            </div>
+             {/* JOIN */}
+             {passphrase && 
+              <div className="flex flex-col flex-1 p-4 min-w-max">
+                <label className="font-semibold text-gray-900 tracking-tight" htmlFor="join">Join with</label>
+                <select name="join" onChange={(event) => handleJoin(event.target.value)} value={join}>
+                  <option value="-">-</option>
+                  <option value=".">.</option>
+                  <option value=",">,</option>
+                  <option value=";">;</option>
+                </select>
+              </div>
+            }
+            {!passphrase &&
+              <div className="flex flex-col flex-1 p-4 min-w-max">
+                <label className="inline-flex items-center">
+                  <input type="radio" value="say" checked={radio === "say"} onChange={handleRadio} disabled={passphrase}/> 
+                  <span className="ml-2 text-gray-800">Easy to say</span> 
+                </label>
+                <label className="inline-flex items-center">
+                  <input type="radio" value="read" checked={radio === "read"} onChange={handleRadio} disabled={passphrase}/>
+                  <span className="ml-2 text-gray-800">Easy to read</span>
+                </label>
+                <label className="inline-flex items-center">
+                  <input type="radio" value="all" checked={radio === "all"} onChange={handleRadio} disabled={passphrase}/>
+                  <span className="ml-2 text-gray-800">All characters</span>
+                </label>
+              </div>
+            }
             {/* CHECKBOXES */}
-            <div className="flex flex-col flex-1 p-4 min-w-max">
-              <label className="">
-                <input type="checkbox" name="Uppercase" checked={uppercase} onChange={(event) => setUppercase(event.target.checked)} disabled={passphrase}/> 
-                <span className="ml-2 text-gray-800">Uppercase</span> 
-              </label>
-              <label className="">
-                <input type="checkbox" name="Lowercase" checked={lowercase} onChange={(event) => setLowercase(event.target.checked)} disabled={passphrase}/> 
-                <span className="ml-2 text-gray-800">Lowercase</span>
-              </label>
-              <label className="">
-                <input type="checkbox" name="Numbers" checked={numbers} onChange={(event) => setNumbers(event.target.checked)} disabled={radio === 'say' || passphrase}/> 
-                <span className="ml-2 text-gray-800">Numbers</span>
-              </label>
-              <label className="">
-                <input type="checkbox" name="Symbols" checked={symbols} onChange={(event) => setSymbols(event.target.checked)} disabled={radio === 'say' || passphrase}/> 
-                <span className="ml-2 text-gray-800">Symbols</span>
-              </label>
-            </div>
-
+            {!passphrase &&
+              <div className="flex flex-col flex-1 p-4 min-w-max">
+                <label className="">
+                  <input type="checkbox" name="Uppercase" checked={uppercase} onChange={(event) => setUppercase(event.target.checked)} disabled={passphrase}/> 
+                  <span className="ml-2 text-gray-800">Uppercase</span> 
+                </label>
+                <label className="">
+                  <input type="checkbox" name="Lowercase" checked={lowercase} onChange={(event) => setLowercase(event.target.checked)} disabled={passphrase}/> 
+                  <span className="ml-2 text-gray-800">Lowercase</span>
+                </label>
+                <label className="">
+                  <input type="checkbox" name="Numbers" checked={numbers} onChange={(event) => setNumbers(event.target.checked)} disabled={radio === 'say' || passphrase}/> 
+                  <span className="ml-2 text-gray-800">Numbers</span>
+                </label>
+                <label className="">
+                  <input type="checkbox" name="Symbols" checked={symbols} onChange={(event) => setSymbols(event.target.checked)} disabled={radio === 'say' || passphrase}/> 
+                  <span className="ml-2 text-gray-800">Symbols</span>
+                </label>
+              </div>
+            }
           </div>
 
           {/* DIVIDERS */}
