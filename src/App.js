@@ -244,9 +244,9 @@ function App() {
 
   // HTML
   return (
-    <div className={`App w-full flex justify-center bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
+    <div className={`App h-screen w-full flex justify-center items-center	bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}>
       <div className="w-full max-w-2xl" >
-        <div className=" bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 sm:py-8">
+        <div className="bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 sm:py-8">
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-gray-900 text-center mb-1">Generate a secure password<span className={`text-6xl text-${color}-400`}>.</span></h1>
             <h2 className="sm:text-lg text-gray-500 font-medium tracking-tight text-center mb-4">Or enter a <span className={`text-gray-900 cursor-pointer hover:text-${color}-400 transition duration-200 ease-in-out`} onClick={(event) => {handleInput('p@$$w0rd')}}>p@$$w0rd</span> to check its <span className={`text-gray-900 cursor-pointer hover:text-${color}-400 transition duration-200 ease-in-out`} onClick={(event) => {handleInput('strength')}}>strength</span><span className={`text-${color}-400 text-3xl`}>.</span></h2> 
             <div className="relative mb-20">
