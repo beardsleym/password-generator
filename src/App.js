@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { RefreshIcon, ClipboardCopyIcon } from "@heroicons/react/outline";
 // External packages
 import zxcvbn from "zxcvbn";
-import sha1 from "crypto-js/sha1";
+import { SHA1 } from "crypto-es/lib/sha1";
 // import crypto from 'crypto-browserify';
 import generator from "generate-password";
+// import generator from "omgopass";
+
 import niceware from "niceware";
 // Components
 import IpData from "./components/IpData";
@@ -139,7 +141,7 @@ function App() {
 
   // API Calls
   const pwnedPwCheck = async (password) => {
-    const hash = sha1(password).toString().toUpperCase();
+    const hash = SHA1(password).toString().toUpperCase();
     const prefix = hash.substring(0, 5);
     const suffix = hash.substring(5);
     // console.log({hash, prefix, suffix})
