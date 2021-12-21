@@ -1,6 +1,6 @@
 # Password Generator and Strength Checker
 
-## Video Demo: <URL HERE>
+### Video Demo: [YouTube](https://youtu.be/qb7mGbj2nzY)
 
 ## Description:
 
@@ -9,7 +9,7 @@ The strength of the password is also checked and is shown in a range of colors f
 At the same time, the password is checked with [HaveIBeenPwned](https://haveibeenpwned.com/Passwords) to see if it is contained in any data breaches.
 Because I'm obsessed with the weather and how I am seen online, a Cloudflare worker returns the users IP, City, Country and uses that information to lookup the current weather.
 
-## Deployed at... [passwrd.pages.dev](https://passwrd.pages.dev)
+### Deployed at... [passwrd.pages.dev](https://passwrd.pages.dev)
 
 ## Get Started
 

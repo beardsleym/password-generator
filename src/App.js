@@ -400,7 +400,7 @@ function App() {
                 type="range"
                 name="length"
                 min="1"
-                max="30"
+                max={passphrase ? 6 : 30}
                 value={length}
                 onChange={(event) => handleLength(event.target.value)}
               />
