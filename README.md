@@ -1,15 +1,15 @@
 # Password Generator and Strength Checker
 
-#### Video Demo: <URL HERE>
+## Video Demo: <URL HERE>
 
-#### Description:
-
-## Deployed at... [passwrd.pages.dev](https://passwrd.pages.dev)
+## Description:
 
 Password-generator is a basic React web application for generating secure, random passwords with the option of customising the length, the appearance of numbers, uppercase and lowercase letters and symbols.
 The strength of the password is also checked and is shown in a range of colors from 0 - no color at all, through to 5 - green.
 At the same time, the password is checked with [HaveIBeenPwned](https://haveibeenpwned.com/Passwords) to see if it is contained in any data breaches.
 Because I'm obsessed with the weather and how I am seen online, a Cloudflare worker returns the users IP, City, Country and uses that information to lookup the current weather.
+
+## Deployed at... [passwrd.pages.dev](https://passwrd.pages.dev)
 
 ## Get Started
 
@@ -66,9 +66,9 @@ We request the data in imperial (Fahrenheit) otherwise we request it in metric (
 
 ### Niceware
 
-A JS library for generating random-yet-memorable passwords, either server-side in Node or in the browser. Each word provides 16 bits of entropy, so a useful password requires at least 3 words.
+> A JS library for generating random-yet-memorable passwords, either server-side in Node or in the browser. Each word provides 16 bits of entropy, so a useful password requires at least 3 words.
 
-Because the wordlist is of exactly size 2^16, Niceware is also useful for convert cryptographic keys and other sequences of random bytes into human-readable phrases. With Niceware, a 128-bit key is equivalent to an 8-word phrase.
+> Because the wordlist is of exactly size 2^16, Niceware is also useful for convert cryptographic keys and other sequences of random bytes into human-readable phrases. With Niceware, a 128-bit key is equivalent to an 8-word phrase.
 
 #### usage in browser
 
@@ -81,7 +81,7 @@ Because the wordlist is of exactly size 2^16, Niceware is also useful for conver
 
 ### Generate-Password
 
-Generate Password is a (relatively) extensive library for generating random and unique passwords.
+> Generate Password is a (relatively) extensive library for generating random and unique passwords.
 
 ### Cloudflare Pages
 
@@ -89,8 +89,8 @@ This is currently deployed on [Pages](https://pages.cloudflare.com/)
 
 #### Environment Variables
 
-Requires Node.js v14.x or later to build successfully. You must expand the Environment Variables (advanced) section and add a NODE_VERSION variable with a value of 14 or greater.
-`node_version = 14`
+> Requires Node.js v14.x or later to build successfully. You must expand the Environment Variables (advanced) section and add a NODE_VERSION variable with a value of 14 or greater.
+> `node_version = 14`
 
 ### Cloudflare Workers
 
