@@ -208,7 +208,6 @@ function App() {
   // Check password strength
   useEffect(() => {
     const result = zxcvbn(password);
-    console.log(result.score);
     setIsPwned(0);
     setFeedback(result);
     setIsCopied(false);
