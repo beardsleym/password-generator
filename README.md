@@ -87,6 +87,11 @@ Generate Password is a (relatively) extensive library for generating random and 
 
 This is currently deployed on [Pages](https://pages.cloudflare.com/)
 
+#### Environment Variables
+
+Requires Node.js v14.x or later to build successfully. You must expand the Environment Variables (advanced) section and add a NODE_VERSION variable with a value of 14 or greater.
+`node_version = 14`
+
 ### Cloudflare Workers
 
 The serverless function running IP data and getting Weather data is on [Workers](https://workers.cloudflare.com/)
