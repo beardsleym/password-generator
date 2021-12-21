@@ -5,11 +5,9 @@ import { RefreshIcon, ClipboardCopyIcon } from "@heroicons/react/outline";
 // External packages
 import zxcvbn from "zxcvbn";
 import { SHA1 } from "crypto-es/lib/sha1";
-// import crypto from 'crypto-browserify';
-import generator from "generate-password";
-// import generator from "omgopass";
-
-import niceware from "niceware";
+import generator from "generate-password-browser";
+// Niceware imported in index.html to use browser version
+// import niceware from "niceware";
 // Components
 import IpData from "./components/IpData";
 import Dividers from "./components/Dividers";
@@ -41,7 +39,7 @@ function App() {
 
   const generatePassword = (value) => {
     if (value === "passphrase") {
-      setPassword(niceware.generatePassphrase(6).join(join));
+      setPassword(window.niceware.generatePassphrase(6).join(join));
     } else if (value === "random") {
       const config = {
         length: 14,
@@ -54,7 +52,9 @@ function App() {
       setPassword(generator.generate(config));
     } else if (passphrase) {
       setPassword(
-        niceware.generatePassphrase(value ? value * 2 : length * 2).join(join)
+        window.niceware
+          .generatePassphrase(value ? value * 2 : length * 2)
+          .join(join)
       );
     } else {
       const config = {
@@ -126,7 +126,6 @@ function App() {
     if (value === join) {
       return;
     }
-    console.log({ value, join, regex, password });
     setPassword(password.replace(regex, value));
     setJoin(value);
   };
@@ -209,6 +208,7 @@ function App() {
   // Check password strength
   useEffect(() => {
     const result = zxcvbn(password);
+    console.log(result.score);
     setIsPwned(0);
     setFeedback(result);
     setIsCopied(false);
@@ -252,7 +252,7 @@ function App() {
   // HTML
   return (
     <div
-      className={`App h-screen w-full flex justify-center items-center	bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}
+      className={`App w-full flex justify-center items-center	bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}
     >
       <div className="w-full max-w-2xl">
         <div className="bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 sm:py-8">
