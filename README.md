@@ -1,5 +1,9 @@
 # Password Generator and Strength Checker
 
+#### Video Demo: <URL HERE>
+
+#### Description:
+
 ## Deployed at... [passwrd.pages.dev](https://passwrd.pages.dev)
 
 Password-generator is a basic React web application for generating secure, random passwords with the option of customising the length, the appearance of numbers, uppercase and lowercase letters and symbols.
@@ -59,6 +63,25 @@ We request the data in imperial (Fahrenheit) otherwise we request it in metric (
 
 > zxcvbn is a password strength estimator inspired by password crackers. Through pattern matching and conservative estimation, it recognizes and weighs 30k common passwords, common names and surnames according to US census data, popular English words from Wikipedia and US television and movies, and other common patterns like dates, repeats (aaa), sequences (abcd), keyboard patterns (qwertyuiop), and l33t speak.
 > [ZXCVBN Github Repo](https://github.com/dropbox/zxcvbn)
+
+### Niceware
+
+A JS library for generating random-yet-memorable passwords, either server-side in Node or in the browser. Each word provides 16 bits of entropy, so a useful password requires at least 3 words.
+
+Because the wordlist is of exactly size 2^16, Niceware is also useful for convert cryptographic keys and other sequences of random bytes into human-readable phrases. With Niceware, a 128-bit key is equivalent to an 8-word phrase.
+
+#### usage in browser
+
+```
+<script src='niceware.js'></script>
+<script>
+  const passphrase = window.niceware.generatePassphrase(8)
+</script>
+```
+
+### Generate-Password
+
+Generate Password is a (relatively) extensive library for generating random and unique passwords.
 
 ### Cloudflare Pages
 
