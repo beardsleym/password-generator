@@ -1,4 +1,6 @@
 //React imports
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import { useDebounce } from "react-use";
 import { useState, useEffect } from "react";
 import { RefreshIcon, ClipboardCopyIcon } from "@heroicons/react/outline";
@@ -14,6 +16,16 @@ import Dividers from "./components/Dividers";
 import Sequences from "./components/Sequences";
 import GuessTimes from "./components/GuessTimes";
 import StrengthMeter from "./components/StrengthMeter";
+
+// Sentry
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  integrations: [new BrowserTracing()],
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 function App() {
   // App
