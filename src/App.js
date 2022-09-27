@@ -263,7 +263,7 @@ function App() {
   // HTML
   return (
     <div
-      className={`App w-full flex justify-center items-center	bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}
+      className={`App w-full sm:h-screen flex justify-center items-center	bg-gradient-to-r from-gray-300 via-${color}-400 to-gray-300`}
     >
       <div className="w-full max-w-2xl">
         <div className="bg-white sm:rounded-3xl sm:shadow-lg px-1 sm:px-4 md:px-8 sm:py-8">
