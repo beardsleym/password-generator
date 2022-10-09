@@ -212,14 +212,6 @@ function App() {
     generatePassword();
   }, [uppercase, lowercase, symbols, numbers, radio]);
 
-  // Generate a new word password if toggled
-  // useEffect(()=>{
-  //   setLength(3)
-  //   // setPassword(niceware.generatePassphrase(length))
-  //   console.log(niceware.generatePassphrase(length*2))
-  //   setPassword(niceware.generatePassphrase(length*2).join('-'))
-  // },[passphrase])
-
   // Check password strength
   useEffect(() => {
     const result = zxcvbn(password);
@@ -258,6 +250,8 @@ function App() {
         case 4:
           color = "green";
           break;
+        default:
+          color = "gray";
       }
     }
     setColor(color);
