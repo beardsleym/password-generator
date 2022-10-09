@@ -85,6 +85,9 @@ function App() {
   const handleInput = (text) => {
     setPassword(text);
     setLength(text.length);
+    if (passphrase) {
+      setPassphrase(false);
+    }
   };
 
   const handleClick = () => {
