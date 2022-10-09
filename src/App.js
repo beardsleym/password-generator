@@ -239,10 +239,10 @@ function App() {
           color = "gray";
           break;
         case 1:
-          color = "gray";
+          color = "red";
           break;
         case 2:
-          color = "red";
+          color = "orange";
           break;
         case 3:
           color = "yellow";
