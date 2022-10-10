@@ -8,6 +8,7 @@ import { RefreshIcon, ClipboardCopyIcon } from "@heroicons/react/outline";
 import zxcvbn from "zxcvbn";
 import { SHA1 } from "crypto-es/lib/sha1";
 import generator from "generate-password-browser";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 // Niceware imported in index.html to use browser version
 // import niceware from "niceware";
 // Components
@@ -33,16 +34,16 @@ function App() {
   const [password, setPassword] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   // Customise password
-  const [length, setLength] = useState(14);
+  const [length, setLength] = useLocalStorage("pw-length", 14);
   const [numbers, setNumbers] = useState(true);
-  const [radio, setRadioval] = useState("read");
+  const [radio, setRadioval] = useLocalStorage("pw-radio", "read");
   const [symbols, setSymbols] = useState(false);
   const [uppercase, setUppercase] = useState(true);
   const [lowercase, setLowercase] = useState(true);
   const [excludeSimilarCharacters, setExcludeSimilarCharacters] =
     useState(false);
   // Word Password - Niceware
-  const [passphrase, setPassphrase] = useState(false);
+  const [passphrase, setPassphrase] = useLocalStorage("pw-passphrase", false);
   const [join, setJoin] = useState("-");
   // API Data
   const [isPwned, setIsPwned] = useState(0);
