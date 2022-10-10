@@ -325,7 +325,7 @@ function App() {
             </button>
             {/* WARNING MESSAGE */}
             {feedback?.feedback?.warning && isPwned > 0 && (
-              <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">
+              <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-1 sm:px-4">
                 <span className="hidden sm:inline">
                   {feedback.feedback.warning}.
                 </span>{" "}
@@ -336,12 +336,12 @@ function App() {
               </p>
             )}
             {feedback?.feedback?.warning && isPwned === 0 && (
-              <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">
+              <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-1 sm:px-4">
                 {feedback.feedback.warning}
               </p>
             )}
             {!feedback?.feedback?.warning && isPwned > 0 && (
-              <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-4">
+              <p className="absolute top-11 left-1.5 font-light text-xs text-red-600 px-1 sm:px-4">
                 {isPwned.toLocaleString()} data{" "}
                 {isPwned > 1 ? "breaches" : "breach"}.
               </p>
