@@ -1,8 +1,8 @@
 # Password Generator and Strength Checker
 
-### Video Demo: [YouTube](https://youtu.be/qb7mGbj2nzY)
+## Video Demo: [YouTube](https://youtu.be/qb7mGbj2nzY)
 
-## Description:
+## Description
 
 Password-generator is a basic React web application for generating secure, random passwords with the option of customising the length, the appearance of numbers, uppercase and lowercase letters and symbols.
 The strength of the password is also checked and is shown in a range of colors from 0 - no color at all, through to 5 - green.
@@ -15,7 +15,7 @@ Because I'm obsessed with the weather and how I am seen online, a Cloudflare wor
 
 ### React
 
-```language
+```bash
 cd src
 yarn start
 ```
@@ -24,7 +24,7 @@ yarn start
 
 ### Cloudflare workers
 
-```language
+```bash
 cd wrangler
 wrangler dev
 wrangler secret put API_KEY  //Add secret
@@ -67,15 +67,14 @@ We request the data in imperial (Fahrenheit) otherwise we request it in metric (
 ### Niceware
 
 > A JS library for generating random-yet-memorable passwords, either server-side in Node or in the browser. Each word provides 16 bits of entropy, so a useful password requires at least 3 words.
-
 > Because the wordlist is of exactly size 2^16, Niceware is also useful for convert cryptographic keys and other sequences of random bytes into human-readable phrases. With Niceware, a 128-bit key is equivalent to an 8-word phrase.
 
 #### usage in browser
 
-```
-<script src='niceware.js'></script>
+```html
+<script src="niceware.js"></script>
 <script>
-  const passphrase = window.niceware.generatePassphrase(8)
+  const passphrase = window.niceware.generatePassphrase(8);
 </script>
 ```
 
@@ -96,7 +95,7 @@ This is currently deployed on [Pages](https://pages.cloudflare.com/)
 
 The serverless function running IP data and getting Weather data is on [Workers](https://workers.cloudflare.com/)
 
-```
+```bash
 cd wrangler
 cp wrangler.toml.example wrangler.toml
 ```
